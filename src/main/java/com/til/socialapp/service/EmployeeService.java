@@ -14,6 +14,10 @@ public class EmployeeService
 	private EmployeeRepository emp;
 
 	public void registerService(Employee e) {
+		if(emp.findByempId(e.getEmpId())!=null)
+		{
+			emp.delete(emp.findByempId(e.getEmpId()));
+		}
 		emp.save(e);
 	}
 
