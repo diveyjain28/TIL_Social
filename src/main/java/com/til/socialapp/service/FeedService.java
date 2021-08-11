@@ -36,7 +36,7 @@ public class FeedService {
 				feed= post.findByEmpIdNotOrderByLikesCountDesc(empId,pageable);
 			}
 		}
-		else
+		else if(type.equals("self"))
 		{
 			if(sorted.equals("recency"))
 			{

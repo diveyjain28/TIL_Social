@@ -1,5 +1,8 @@
 package com.til.socialapp.model;
 
+import java.time.LocalDateTime;
+import java.util.Date;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +15,20 @@ public class Comment {
 	private String name;
 	private int empId;
 	private String comment;
-	private String createdAt;
+	private LocalDateTime createdAt;
+
+	
+	
+	public Comment(ObjectId commentId, String postId, String name, int empId, String comment, LocalDateTime createdAt) {
+		super();
+		this.commentId = commentId;
+		this.postId = postId;
+		this.name = name;
+		this.empId = empId;
+		this.comment = comment;
+		this.createdAt = java.time.LocalDateTime.now();
+
+	}
 
 	public ObjectId getCommentId() {
 		return commentId;
@@ -54,11 +70,11 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public String getCreatedAt() {
+	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +22,7 @@ import com.til.socialapp.service.EmployeeService;
 import com.til.socialapp.service.FeedService;
 import com.til.socialapp.service.LikeService;
 import com.til.socialapp.service.PostService;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/tilsocialapp")
 public class MainController 
