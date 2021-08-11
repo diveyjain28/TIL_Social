@@ -17,6 +17,19 @@ public class Comment {
 	private String comment;
 	private LocalDateTime createdAt;
 
+	
+	
+	public Comment(ObjectId commentId, String postId, String name, int empId, String comment, LocalDateTime createdAt) {
+		super();
+		this.commentId = commentId;
+		this.postId = postId;
+		this.name = name;
+		this.empId = empId;
+		this.comment = comment;
+		this.createdAt = java.time.LocalDateTime.now();
+
+	}
+
 	public ObjectId getCommentId() {
 		return commentId;
 	}
