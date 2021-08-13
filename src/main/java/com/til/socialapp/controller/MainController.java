@@ -1,7 +1,7 @@
 package com.til.socialapp.controller;
 
+
 import java.util.List;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -39,10 +39,10 @@ public class MainController
 	private FeedService feedserv;
 	//APIs for profile save and fetch
 	@PostMapping("/profile/save")
-	public String register(@RequestBody Employee emp)
+	public Employee register(@RequestBody Employee emp)
 	{
-		empserv.registerService(emp);
-		return "User registered successfully";
+		Employee ret=empserv.registerService(emp);
+		return ret;
 	}
 	@GetMapping("/profile/fetch/{empId}")
 	public Employee fetchEmployeeById(@PathVariable("empId") int empId)
@@ -53,10 +53,10 @@ public class MainController
 	
 	//APIs for comment save and fetch
 	@PostMapping("/comment/save")
-	public String registerComment(@RequestBody Comment comment)
+	public Comment registerComment(@RequestBody Comment comment)
 	{
-		comserv.registerServiceComment(comment);
-		return "User registered successfully";
+		Comment ret=comserv.registerServiceComment(comment);
+		return ret;
 	}
 	@GetMapping("/comment/fetch/{postId}")
 	public List<Comment> fetchComment(@PathVariable("postId") String postId)
@@ -67,10 +67,10 @@ public class MainController
 	
 	//API for Post Save
 	@PostMapping("/post/save")
-	public String savePost(@RequestBody Post post)
+	public Post savePost(@RequestBody Post post)
 	{
-		postserv.savePostService(post);
-		return "Post saved successfully";
+		Post ret=postserv.savePostService(post);
+		return ret;
 	}
 	
 	//API for like
@@ -81,13 +81,13 @@ public class MainController
 		return "Post liked successfully";
 	}
 	
+	//API for feed
 	@GetMapping("/post/fetch")
 	@ResponseBody
 	public Page<Post> feedPost(@RequestParam("page") int page,@RequestParam("sortBy") String sorted,@RequestParam("empId") int empid,
 			@RequestParam("type") String type)
 	{
-		Page<Post> feed= feedserv.getFeed(sorted, empid, type,page);
-		return feed;
+	    return feedserv.getFeed(sorted, empid, type,page);
 	}
 	
 }
