@@ -7,9 +7,13 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 @Document(collection = "comment")
 public class Comment {
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId commentId;
 	private String postId;
 	private String name;

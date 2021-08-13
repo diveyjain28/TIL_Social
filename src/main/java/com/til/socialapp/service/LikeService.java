@@ -10,6 +10,8 @@ import com.til.socialapp.model.Post;
 import com.til.socialapp.repository.LikeRepository;
 import com.til.socialapp.repository.PostRepository;
 
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 @Service
 public class LikeService 
 {
@@ -18,44 +20,36 @@ public class LikeService
 	@Autowired
 	private PostRepository pr;
 	
-	public void likePostService(Like l)
+	public Like likePostService(Like l)
 	{
-		List<Post> temp1=pr.findAll();
-		List<Like> temp2=like.findAll();
-		Post p=null;
+		List<Like> list= like.findByempId(l.getEmpId());
+		Post p=pr.findByPostId(l.getPostId());
 		int flag=0;
-		for(int i=0;i<temp2.size();i++)
+	    for(int i=0;i<list.size();i++)
+	    {
+	       if(list.get(i).getPostId().equals(l.getPostId()))
+	       {
+	    	   System.out.println("Hello");
+	    	   flag=1;
+	    	   break;
+	       }
+	    }
+	    if(flag==0)
 		{
-			if(temp2.get(i).getEmpId()==l.getEmpId())
-			{
-				flag=1;
-				break;
-			}
-		}
-		for(int i=0;i<temp1.size();i++)
-		{
-			if(temp1.get(i).getPostId().toString().equals( l.getPostId().toString() ) )
-			{
-				if(flag==0)
-				{
-					p=temp1.get(i);
-					p.setLikesCount(p.getLikesCount()+1);
-					like.save(l);
-				}
-				else
-				{
-					p=temp1.get(i);
-					p.setLikesCount(p.getLikesCount()-1);
-					like.delete(l);
-				}
-			}
-		}
-		if(p==null)
+			//System.out.println("hi");
+	    	p.setLikesCount(p.getLikesCount()+1);
+			pr.delete(pr.findByPostId(l.getPostId()));
 			pr.save(p);
+			like.save(l);
+			
+		}
 		else
 		{
-			pr.deleteById(p.getPostId());
+			p.setLikesCount(p.getLikesCount()-1);
+			like.delete(like.findByPostId(l.getPostId()));
+			pr.delete(p);
 			pr.save(p);
 		}
+     return l;
 	}
 }

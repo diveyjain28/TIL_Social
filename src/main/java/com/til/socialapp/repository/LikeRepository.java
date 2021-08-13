@@ -1,5 +1,7 @@
 package com.til.socialapp.repository;
 
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
@@ -9,6 +11,12 @@ public interface LikeRepository extends MongoRepository<Like, ObjectId>{
 	
 
 	
-	Object findByEmpId(int empId);
+	public List<Like> findByEmpId(int empId);
+
+	public Like findByPostId(String postId);
+
+	public List<Like> findByempId(int empId);
+
+	
 
 }
