@@ -14,10 +14,10 @@ public class CommentService {
 	@Autowired
 	CommentRepository cr;
 
-	public void registerServiceComment(Comment comment) {
+	public Comment registerServiceComment(Comment comment) {
 
 		cr.save(comment);
-
+        return comment;
 	}
 
 	public List<Comment> fetchServiceComment(String postId) {

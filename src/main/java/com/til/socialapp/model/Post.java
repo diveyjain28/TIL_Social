@@ -6,10 +6,14 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 @Document(collection = "post")
 public class Post {
 	// empImgUrl,images,videos not used
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId postId;
 	private int empId;
 	private String name;
@@ -26,6 +30,7 @@ public class Post {
 			LocalDateTime updatedAt, String content, String[] tags) {
 		
 		super();
+		//this.postId=new ObjectId().toString();
 		this.postId=postId;
 		this.empId = empId;
 		this.name = name;
@@ -79,7 +84,7 @@ public class Post {
 		this.commentsCount = commentsCount;
 	}
 
-	public boolean isHasLiked() {
+	public boolean getHasLiked() {
 		return hasLiked;
 	}
 

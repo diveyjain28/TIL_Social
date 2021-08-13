@@ -12,8 +12,11 @@ public class PostService
 	@Autowired
 	private PostRepository post;
 	
-	public void savePostService(Post p)
+	public Post savePostService(Post p)
 	{
+		
 		post.save(p);
+		return p;
 	}
+	
 }
