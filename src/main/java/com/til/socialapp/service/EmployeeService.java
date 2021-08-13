@@ -3,6 +3,8 @@ package com.til.socialapp.service;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.til.socialapp.exception.UserNotFoundException;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.repository.EmployeeRepository;
 
@@ -23,8 +25,12 @@ public class EmployeeService
 
 	public Employee fetchServiceEmployeeById(int empId) {
 
-		Employee ret = emp.findByempId(empId);
-
+		Employee ret=null;
+		ret = emp.findByempId(empId);	
+		if(null == ret)
+		{
+			throw new UserNotFoundException("Employee ID "+empId+" doesn't exist");
+		}
 		return ret;
 	}
 

@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.til.socialapp.repository.PostRepository;
+import com.til.socialapp.exception.SocialAppException;
 import com.til.socialapp.model.Post;
 
 @Service
@@ -57,6 +58,12 @@ public class FeedService {
 //		} else {
 //			feed = sortByTrending(feed);
 //		}
+//		if(feed!=null)
+//			{
+//				throw new SocialAppException("Generic exception");
+//			}
+//		String res=null;
+//		System.out.println(res.length());
 		return feed;
 	}
 
