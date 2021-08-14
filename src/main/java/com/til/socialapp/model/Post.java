@@ -1,17 +1,14 @@
 package com.til.socialapp.model;
 
-
 import java.time.LocalDateTime;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Document(collection = "post")
 public class Post {
-	// empImgUrl,images,videos not used
 	@Id
 	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId postId;
@@ -24,23 +21,30 @@ public class Post {
 	private LocalDateTime updatedAt;
 	private String content;
 	private String[] tags;
+	private String[] images;
+	private String[] videos;
 
-	// Constructor
-	public Post(ObjectId postId,int empId, String name, int likesCount, int commentsCount, boolean hasLiked, LocalDateTime createdAt,
-			LocalDateTime updatedAt, String content, String[] tags) {
-		
+	// Constructors
+	public Post() {
 		super();
-		//this.postId=new ObjectId().toString();
-		this.postId=postId;
+	}
+
+	public Post(ObjectId postId, int empId, String name, int likesCount, int commentsCount, boolean hasLiked,
+			LocalDateTime createdAt, LocalDateTime updatedAt, String content, String[] tags, String[] images,
+			String[] videos) {
+		super();
+		this.postId = postId;
 		this.empId = empId;
 		this.name = name;
 		this.likesCount = likesCount;
 		this.commentsCount = commentsCount;
 		this.hasLiked = hasLiked;
-		this.createdAt =  java.time.LocalDateTime.now();
-		this.updatedAt = java.time.LocalDateTime.now();
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 		this.content = content;
 		this.tags = tags;
+		this.images = images;
+		this.videos = videos;
 	}
 
 	// Getters and Setters
@@ -122,5 +126,21 @@ public class Post {
 
 	public void setTags(String[] tags) {
 		this.tags = tags;
+	}
+
+	public String[] getImages() {
+		return images;
+	}
+
+	public void setImages(String[] images) {
+		this.images = images;
+	}
+
+	public String[] getVideos() {
+		return videos;
+	}
+
+	public void setVideos(String[] videos) {
+		this.videos = videos;
 	}
 }

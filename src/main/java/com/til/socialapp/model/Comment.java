@@ -5,12 +5,18 @@ import java.util.Date;
 
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Document(collection = "comment")
 public class Comment {
 	@Id
+	@JsonSerialize(using = ToStringSerializer.class)
 	private ObjectId commentId;
+	@Indexed
 	private String postId;
 	private String name;
 	private int empId;

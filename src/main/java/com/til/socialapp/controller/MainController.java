@@ -75,10 +75,9 @@ public class MainController
 	
 	//API for like
 	@PostMapping("/like/save")
-	public String likePost(@RequestBody Like like)
+	public Like likePost(@RequestBody Like like)
 	{
-		likeserv.likePostService(like);
-		return "Post liked successfully";
+		return likeserv.likePostService(like);
 	}
 	
 	//API for feed
