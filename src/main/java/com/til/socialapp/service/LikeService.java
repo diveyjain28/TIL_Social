@@ -1,6 +1,5 @@
 package com.til.socialapp.service;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,7 @@ import com.til.socialapp.model.Post;
 import com.til.socialapp.repository.LikeRepository;
 import com.til.socialapp.repository.PostRepository;
 
-import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
+
 
 @Service
 public class LikeService 
@@ -29,17 +28,15 @@ public class LikeService
 	    {
 	       if(list.get(i).getPostId().equals(l.getPostId()))
 	       {
-	    	   System.out.println("Hello");
 	    	   flag=1;
 	    	   break;
 	       }
 	    }
 	    if(flag==0)
 		{
-			//System.out.println("hi");
 	    	p.setLikesCount(p.getLikesCount()+1);
-			pr.delete(pr.findByPostId(l.getPostId()));
 			pr.save(p);
+			l.setLiked(true);
 			like.save(l);
 			
 		}
@@ -47,7 +44,7 @@ public class LikeService
 		{
 			p.setLikesCount(p.getLikesCount()-1);
 			like.delete(like.findByPostId(l.getPostId()));
-			pr.delete(p);
+			l.setLiked(false);
 			pr.save(p);
 		}
      return l;
