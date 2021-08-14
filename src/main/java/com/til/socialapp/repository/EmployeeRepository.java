@@ -7,4 +7,6 @@ public interface EmployeeRepository extends MongoRepository<Employee, Integer>
 {
 
 	Employee findByempId(int empId);
+
+	Employee findByEmpId(int empId);
 }

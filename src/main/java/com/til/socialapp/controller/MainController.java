@@ -17,11 +17,15 @@ import com.til.socialapp.model.Comment;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.Like;
 import com.til.socialapp.model.Post;
+import com.til.socialapp.model.Tag;
+import com.til.socialapp.model.TeamDep;
 import com.til.socialapp.service.CommentService;
 import com.til.socialapp.service.EmployeeService;
 import com.til.socialapp.service.FeedService;
 import com.til.socialapp.service.LikeService;
 import com.til.socialapp.service.PostService;
+import com.til.socialapp.service.TagService;
+import com.til.socialapp.service.TeamdepService;
 @CrossOrigin
 @RestController
 @RequestMapping("/tilsocialapp")
@@ -37,6 +41,11 @@ public class MainController
 	private CommentService comserv;
 	@Autowired
 	private FeedService feedserv;
+	@Autowired
+	private TeamdepService tdserv;
+	@Autowired
+	private TagService tagsserv;
+	
 	//APIs for profile save and fetch
 	@PostMapping("/profile/save")
 	public Employee register(@RequestBody Employee emp)
@@ -89,4 +98,18 @@ public class MainController
 	    return feedserv.getFeed(sorted, empid, type,page);
 	}
 	
+	@PostMapping("/profile/tag/save")
+	public Tag updateTag(@RequestBody Tag t1)
+	{
+		Tag ret=tagsserv.updateserviceTag(t1);
+		return ret;
+	}
+	@GetMapping("/common/fetch")
+	public TeamDep addTeamDepService()
+	{
+		TeamDep td=tdserv.fetchTeamdepService();
+		
+		return td;
+		
+	}
 }

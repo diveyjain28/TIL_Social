@@ -25,6 +25,10 @@ public class Comment {
 
 	
 	
+	public Comment() {
+		super();
+	}
+
 	public Comment(ObjectId commentId, String postId, String name, int empId, String comment, LocalDateTime createdAt) {
 		super();
 		this.commentId = commentId;
