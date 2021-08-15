@@ -2,6 +2,7 @@ package com.til.socialapp.model;
 
 import java.time.LocalDateTime;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -14,12 +15,15 @@ public class Post {
 	private ObjectId postId;
 	private int empId;
 	private String name;
+	private String designation;
 	private int likesCount;
 	private int commentsCount;
 	private boolean hasLiked;
-	private LocalDateTime createdAt;
-	private LocalDateTime updatedAt;
+	
+	private LocalDateTime createdAt=LocalDateTime.now();
+	private LocalDateTime updatedAt=LocalDateTime.now();
 	private String content;
+	private String empImgUrl;
 	private String[] tags;
 	private String[] images;
 	private String[] videos;
@@ -29,22 +33,24 @@ public class Post {
 		super();
 	}
 
-	public Post(ObjectId postId, int empId, String name, int likesCount, int commentsCount, boolean hasLiked,
+	public Post(ObjectId postId, int empId, String name,String designation, int likesCount, int commentsCount, boolean hasLiked,
 			LocalDateTime createdAt, LocalDateTime updatedAt, String content, String[] tags, String[] images,
-			String[] videos) {
+			String[] videos,String empImgUrl) {
 		super();
 		this.postId = postId;
 		this.empId = empId;
 		this.name = name;
-		this.likesCount = likesCount;
-		this.commentsCount = commentsCount;
-		this.hasLiked = hasLiked;
+		this.likesCount = 0;
+		this.commentsCount = 0;
+		this.hasLiked = false;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.content = content;
 		this.tags = tags;
 		this.images = images;
 		this.videos = videos;
+		this.designation=designation;
+		this.empImgUrl=empImgUrl;
 	}
 
 	// Getters and Setters
@@ -143,4 +149,22 @@ public class Post {
 	public void setVideos(String[] videos) {
 		this.videos = videos;
 	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getEmpImgUrl() {
+		return empImgUrl;
+	}
+
+	public void setEmpImgUrl(String empImgUrl) {
+		this.empImgUrl = empImgUrl;
+	}
+	
+	
 }

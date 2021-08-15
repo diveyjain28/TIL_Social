@@ -21,19 +21,24 @@ public class Comment {
 	private String name;
 	private int empId;
 	private String comment;
-	private LocalDateTime createdAt;
+	private String empImgUrl;
+	private LocalDateTime createdAt=LocalDateTime.now();
+    
+	
+	
+	public Comment() {
+		super();
+	}
 
-	
-	
-	public Comment(ObjectId commentId, String postId, String name, int empId, String comment, LocalDateTime createdAt) {
+	public Comment(ObjectId commentId, String postId, String name, int empId, String comment,String empImgUrl, LocalDateTime createdAt) {
 		super();
 		this.commentId = commentId;
 		this.postId = postId;
 		this.name = name;
 		this.empId = empId;
+		this.empImgUrl=empImgUrl;
 		this.comment = comment;
-		this.createdAt = java.time.LocalDateTime.now();
-
+		this.createdAt = createdAt;
 	}
 
 	public ObjectId getCommentId() {
@@ -83,4 +88,15 @@ public class Comment {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	public String getEmpImgUrl() {
+		return empImgUrl;
+	}
+
+	public void setEmpImgUrl(String empImgUrl) {
+		this.empImgUrl = empImgUrl;
+	}
+
+	
+	
 }

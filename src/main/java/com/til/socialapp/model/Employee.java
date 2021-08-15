@@ -8,7 +8,7 @@ public class Employee {
 	@Id
 	private int empId;
 	private String name;
-	private String dept;
+	private String department;
 	private String bio;
 	private String team;
 	private String designation;
@@ -20,12 +20,12 @@ public class Employee {
 		super();
 	}
 
-	public Employee(String name, int empId, String dept, String bio, String team, String designation,
+	public Employee(String name, int empId, String department, String bio, String team, String designation,
 			String[] interests, String imgUrl) {
 		super();
 		this.name = name;
 		this.empId = empId;
-		this.dept = dept;
+		this.department = department;
 		this.bio = bio;
 		this.team = team;
 		this.designation = designation;
@@ -58,12 +58,13 @@ public class Employee {
 		this.empId = empId;
 	}
 
-	public String getDept() {
-		return dept;
+
+	public String getDepartment() {
+		return department;
 	}
 
-	public void setDept(String dept) {
-		this.dept = dept;
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 
 	public String getBio() {
