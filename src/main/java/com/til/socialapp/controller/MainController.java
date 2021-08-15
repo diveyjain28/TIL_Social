@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.til.socialapp.model.Comment;
+import com.til.socialapp.model.Common;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.Like;
 import com.til.socialapp.model.Post;
 import com.til.socialapp.model.Tag;
-import com.til.socialapp.model.TeamDep;
 import com.til.socialapp.service.CommentService;
+import com.til.socialapp.service.CommonService;
 import com.til.socialapp.service.EmployeeService;
 import com.til.socialapp.service.FeedService;
 import com.til.socialapp.service.LikeService;
 import com.til.socialapp.service.PostService;
 import com.til.socialapp.service.TagService;
-import com.til.socialapp.service.TeamdepService;
 @CrossOrigin
 @RestController
 @RequestMapping("/tilsocialapp")
@@ -42,7 +42,7 @@ public class MainController
 	@Autowired
 	private FeedService feedserv;
 	@Autowired
-	private TeamdepService tdserv;
+	private CommonService cserv;
 	@Autowired
 	private TagService tagsserv;
 	
@@ -105,11 +105,11 @@ public class MainController
 		return ret;
 	}
 	@GetMapping("/common/fetch")
-	public TeamDep addTeamDepService()
+	public Common addTeamDepService()
 	{
-		TeamDep td=tdserv.fetchTeamdepService();
+		Common c=cserv.fetchCommonService();
 		
-		return td;
+		return c;
 		
 	}
 }

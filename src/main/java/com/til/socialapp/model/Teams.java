@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Document(collection="common")
-public class TeamDep {
+@Document(collection="teams")
+public class Teams {
 	
 	//@BsonProperty(value = "team")
 	private String team;
@@ -19,7 +19,7 @@ public class TeamDep {
 	private Departments[] departments;
 	
 	
-	public TeamDep(String team, Departments[] departments) {
+	public Teams(String team, Departments[] departments) {
 		super();
 		this.team = team;
 		this.departments = departments;
@@ -36,14 +36,18 @@ public class TeamDep {
 	}
 
 
-	public Departments[] getDep() {
+	public Departments[] getDepartments() {
 		return departments;
 	}
 
 
-	public void setDep(Departments[] departments) {
+	public void setDepartments(Departments[] departments) {
 		this.departments = departments;
 	}
+
+
+	
+	
 	
 	
 	

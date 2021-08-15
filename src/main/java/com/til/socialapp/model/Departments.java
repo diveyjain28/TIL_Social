@@ -4,7 +4,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection="departments")
 public class Departments {
+
 	private String name;
 	private String[] designations;
 	public Departments(String name, String[] designations) {
