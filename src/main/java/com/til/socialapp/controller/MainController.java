@@ -84,7 +84,7 @@ public class MainController
 	
 	//API for like
 	@PostMapping("/like/save")
-	public Like likePost(@RequestBody Like like)
+	public Post likePost(@RequestBody Like like)
 	{
 		return likeserv.likePostService(like);
 	}
