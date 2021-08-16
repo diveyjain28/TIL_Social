@@ -19,7 +19,7 @@ public class LikeService
 	@Autowired
 	private PostRepository pr;
 	
-	public Like likePostService(Like l)
+	public Post likePostService(Like l)
 	{
 		List<Like> list= like.findByempId(l.getEmpId());
 		Post p=pr.findByPostId(l.getPostId());
@@ -47,6 +47,6 @@ public class LikeService
 			l.setLiked(false);
 			pr.save(p);
 		}
-     return l;
+     return p;
 	}
 }
