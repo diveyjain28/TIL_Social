@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.Like;
 import com.til.socialapp.model.Post;
+import com.til.socialapp.repository.EmployeeRepository;
 import com.til.socialapp.repository.LikeRepository;
 import com.til.socialapp.repository.PostRepository;
 
@@ -18,12 +21,18 @@ public class LikeService
 	private LikeRepository like;
 	@Autowired
 	private PostRepository pr;
-	
+	@Autowired
+	private EmployeeRepository emp;
 	public Post likePostService(Like l)
 	{
 		List<Like> list= like.findByempId(l.getEmpId());
 		Post p=pr.findByPostId(l.getPostId());
 		int flag=0;
+		Employee e=emp.findByEmpId(p.getEmpId());
+		p.setName(e.getName());
+		p.setDesignation(e.getDesignation());
+		p.setEmpImgUrl(e.getImgUrl());
+
 	    for(int i=0;i<list.size();i++)
 	    {
 	       if(list.get(i).getPostId().equals(l.getPostId()))
@@ -38,6 +47,7 @@ public class LikeService
 			pr.save(p);
 			l.setLiked(true);
 			like.save(l);
+			p.setHasLiked(true);
 			
 		}
 		else
@@ -47,6 +57,7 @@ public class LikeService
 			l.setLiked(false);
 			pr.save(p);
 		}
+	    
      return p;
 	}
 }
