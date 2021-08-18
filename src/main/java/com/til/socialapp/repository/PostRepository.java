@@ -17,6 +17,8 @@ public interface PostRepository extends MongoRepository<Post, ObjectId>{
 	public Page<Post> findByEmpIdAndTagsInOrderByLikesCountDesc(int empId,String[] tags,Pageable pageable);
 	public Page<Post> findByEmpIdNotAndTagsInOrderByCreatedAtDesc(int empId,String[] tags,Pageable pageable);
 	public Page<Post> findByEmpIdAndTagsInOrderByCreatedAtDesc(int empId,String[] tags,Pageable pageable);
+
+
 	public Post findByPostId(String postId);
 	
 }

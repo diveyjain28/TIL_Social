@@ -14,6 +14,8 @@ import org.springframework.stereotype.Service;
 import com.til.socialapp.repository.EmployeeRepository;
 import com.til.socialapp.repository.PostRepository;
 import com.til.socialapp.model.Employee;
+
+import ch.qos.logback.core.recovery.ResilientSyslogOutputStream;
 import com.til.socialapp.model.Post;
 
 @Service
@@ -38,6 +40,13 @@ public class FeedService {
 			} else {
 				feed = post.findByEmpIdAndTagsInOrderByLikesCountDesc(empId,e.getInterests(), pageable);
 			}
+		}
+		for(int i=0;i<feed.getNumberOfElements();i++)
+		{
+			Post p=feed.getContent().get(i);
+			p.setDesignation(emp.findByempId(p.getEmpId()).getDesignation());
+			p.setName(emp.findByempId(p.getEmpId()).getName());
+			p.setEmpImgUrl(emp.findByempId(p.getEmpId()).getImgUrl());
 		}
 		return feed;
 	}
