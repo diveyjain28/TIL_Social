@@ -20,7 +20,7 @@ public class EmployeeService {
 	public Employee fetchServiceEmployeeById(int empId) {
 
 		Employee ret = null;
-		ret = emp.findByempId(empId);
+		ret = emp.findByEmpId(empId);
 		if (null == ret) {
 			throw new UserNotFoundException("Employee ID " + empId + " doesn't exist");
 		}

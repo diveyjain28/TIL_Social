@@ -1,57 +1,56 @@
 package com.til.socialapp.model;
 
 import java.time.LocalDateTime;
-import org.bson.types.ObjectId;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+public class PostResponse {
 
-@Component
-@Document(collection = "post")
-public class Post {
-	@Id
-	@JsonSerialize(using = ToStringSerializer.class)
-	private ObjectId postId;
+	private String postId;
 	private int empId;
-	private int likesCount = 0;
-	private int commentsCount = 0;
-	private LocalDateTime createdAt = LocalDateTime.now();
-	private LocalDateTime updatedAt = LocalDateTime.now();
+	private String name;
+	private String designation;
+	private int likesCount;
+	private int commentsCount;
+	private boolean hasLiked;
+
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 	private String content;
+	private String empImgUrl;
 	private String[] tags;
 	private String[] images;
 	private String[] videos;
 
-	// Constructors
-	public Post() {
+	// constructors
+	public PostResponse() {
+		super();
 	}
 
-	public Post(ObjectId postId, int empId, int likesCount, int commentsCount, LocalDateTime createdAt,
-			LocalDateTime updatedAt, String content, String[] tags, String[] images, String[] videos) {
+	public PostResponse(String postId, int empId, String name, String designation, int likesCount, int commentsCount,
+			boolean hasLiked, LocalDateTime createdAt, LocalDateTime updatedAt, String content, String empImgUrl,
+			String[] tags, String[] images, String[] videos) {
 		super();
 		this.postId = postId;
 		this.empId = empId;
+		this.name = name;
+		this.designation = designation;
 		this.likesCount = likesCount;
 		this.commentsCount = commentsCount;
+		this.hasLiked = hasLiked;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.content = content;
+		this.empImgUrl = empImgUrl;
 		this.tags = tags;
 		this.images = images;
 		this.videos = videos;
-
 	}
 
-	// Getters and Setters
-	public ObjectId getPostId() {
+	// Getters and setters
+	public String getPostId() {
 		return postId;
 	}
 
-	public void setPostId(ObjectId postId) {
+	public void setPostId(String postId) {
 		this.postId = postId;
 	}
 
@@ -61,6 +60,22 @@ public class Post {
 
 	public void setEmpId(int empId) {
 		this.empId = empId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
 	}
 
 	public int getLikesCount() {
@@ -77,6 +92,14 @@ public class Post {
 
 	public void setCommentsCount(int commentsCount) {
 		this.commentsCount = commentsCount;
+	}
+
+	public boolean isHasLiked() {
+		return hasLiked;
+	}
+
+	public void setHasLiked(boolean hasLiked) {
+		this.hasLiked = hasLiked;
 	}
 
 	public LocalDateTime getCreatedAt() {
@@ -103,6 +126,14 @@ public class Post {
 		this.content = content;
 	}
 
+	public String getEmpImgUrl() {
+		return empImgUrl;
+	}
+
+	public void setEmpImgUrl(String empImgUrl) {
+		this.empImgUrl = empImgUrl;
+	}
+
 	public String[] getTags() {
 		return tags;
 	}
@@ -126,5 +157,4 @@ public class Post {
 	public void setVideos(String[] videos) {
 		this.videos = videos;
 	}
-
 }

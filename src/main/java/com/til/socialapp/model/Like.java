@@ -3,32 +3,30 @@ package com.til.socialapp.model;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 @Document(collection = "like")
 public class Like {
 	@Id
+	private String id;
 	private String postId;
-	private boolean liked;
 	private int empId;
 
 	public Like() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 
-	public Like(boolean liked, String postId, int empId) {
+	public Like(String postId, int empId) {
 		super();
-		this.liked = liked;
 		this.postId = postId;
 		this.empId = empId;
 	}
 
-	public boolean isLiked() {
-		return liked;
+	public String getId() {
+		return id;
 	}
 
-	public void setLiked(boolean liked) {
-		this.liked = liked;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getPostId() {
