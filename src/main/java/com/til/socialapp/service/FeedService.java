@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import com.til.socialapp.repository.EmployeeRepository;
 import com.til.socialapp.repository.LikeRepository;
 import com.til.socialapp.repository.PostRepository;
+
 import com.til.socialapp.adaptor.PostAdaptor;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.FeedResponse;
 import com.til.socialapp.model.Like;
+
 
 import com.til.socialapp.model.Post;
 import com.til.socialapp.model.PostResponse;
@@ -28,6 +30,7 @@ public class FeedService {
 	private PostRepository post;
 	@Autowired
 	private EmployeeRepository emp;
+
 	@Autowired
 	private LikeRepository like;
 
@@ -51,6 +54,7 @@ public class FeedService {
 				// feed = post.findByEmpIdAndTagsInOrderByLikesCountDesc(empId,e.getInterests(),
 				// pageable);
 				feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
+
 
 			}
 		}
