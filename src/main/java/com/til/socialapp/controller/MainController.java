@@ -90,7 +90,7 @@ public class MainController {
 	// API for feed
 	@GetMapping("/post/fetch")
 	@ResponseBody
-	public FeedResponse feedPost(@RequestParam("page") int page, @RequestParam("sortBy") String sorted,
+	public Page<PostResponse> feedPost(@RequestParam("page") int page, @RequestParam("sortBy") String sorted,
 			@RequestParam("empId") int empid, @RequestParam("type") String type) {
 		return feedserv.getFeed(sorted, empid, type, page);
 	}

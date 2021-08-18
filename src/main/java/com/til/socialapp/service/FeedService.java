@@ -34,7 +34,7 @@ public class FeedService {
 	@Autowired
 	private LikeRepository like;
 
-	public FeedResponse getFeed(String sorted, int empId, String type, int page) {
+	public Page<PostResponse> getFeed(String sorted, int empId, String type, int page) {
 		Pageable pageable = PageRequest.of(page, 5);
 		Page<Post> feed = null;
 		Employee e = emp.findByEmpId(empId);
@@ -75,8 +75,9 @@ public class FeedService {
 			ret.add(temp);
 
 		}
-		FeedResponse feedret = new FeedResponse();
-		feedret.setContent(ret);
-		return feedret;
+		Page<PostResponse> pageret = new PageImpl<>(ret);
+//		FeedResponse feedret = new FeedResponse();
+//		feedret.setContent(ret);
+		return pageret;
 	}
 }
