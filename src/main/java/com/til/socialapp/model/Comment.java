@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -18,25 +19,21 @@ public class Comment {
 	private ObjectId commentId;
 	@Indexed
 	private String postId;
-	private String name;
+	// private String name;
 	private int empId;
 	private String comment;
-	private String empImgUrl;
-	private LocalDateTime createdAt=LocalDateTime.now();
-    
-	
-	
+	// private String empImgUrl;
+	private LocalDateTime createdAt = LocalDateTime.now();
+
 	public Comment() {
 		super();
 	}
 
-	public Comment(ObjectId commentId, String postId, String name, int empId, String comment,String empImgUrl, LocalDateTime createdAt) {
+	public Comment(ObjectId commentId, String postId, int empId, String comment, LocalDateTime createdAt) {
 		super();
 		this.commentId = commentId;
 		this.postId = postId;
-		this.name = name;
 		this.empId = empId;
-		this.empImgUrl=empImgUrl;
 		this.comment = comment;
 		this.createdAt = createdAt;
 	}
@@ -55,14 +52,6 @@ public class Comment {
 
 	public void setPostId(String postId) {
 		this.postId = postId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public int getEmpId() {
@@ -89,14 +78,4 @@ public class Comment {
 		this.createdAt = createdAt;
 	}
 
-	public String getEmpImgUrl() {
-		return empImgUrl;
-	}
-
-	public void setEmpImgUrl(String empImgUrl) {
-		this.empImgUrl = empImgUrl;
-	}
-
-	
-	
 }

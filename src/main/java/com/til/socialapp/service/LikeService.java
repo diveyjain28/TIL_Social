@@ -5,59 +5,53 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.til.socialapp.adaptor.PostAdaptor;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.Like;
 import com.til.socialapp.model.Post;
+import com.til.socialapp.model.PostResponse;
 import com.til.socialapp.repository.EmployeeRepository;
 import com.til.socialapp.repository.LikeRepository;
 import com.til.socialapp.repository.PostRepository;
 
-
-
 @Service
-public class LikeService 
-{
+public class LikeService {
 	@Autowired
 	private LikeRepository like;
 	@Autowired
 	private PostRepository pr;
 	@Autowired
 	private EmployeeRepository emp;
-	public Post likePostService(Like l)
-	{
-		List<Like> list= like.findByempId(l.getEmpId());
-		Post p=pr.findByPostId(l.getPostId());
-		int flag=0;
-		Employee e=emp.findByEmpId(p.getEmpId());
-		p.setName(e.getName());
-		p.setDesignation(e.getDesignation());
-		p.setEmpImgUrl(e.getImgUrl());
 
-	    for(int i=0;i<list.size();i++)
-	    {
-	       if(list.get(i).getPostId().equals(l.getPostId()))
-	       {
-	    	   flag=1;
-	    	   break;
-	       }
-	    }
-	    if(flag==0)
-		{
-	    	p.setLikesCount(p.getLikesCount()+1);
-			pr.save(p);
-			l.setLiked(true);
+	public PostResponse likePostService(Like l) {
+		List<Like> list = like.findByempId(l.getEmpId());
+		Post post = pr.findByPostId(l.getPostId());
+		int empid = pr.findByPostId(l.getPostId()).getEmpId();
+		Employee employee = emp.findByEmpId(empid);
+		PostAdaptor postadaptor = new PostAdaptor();
+		PostResponse ret = postadaptor.convert(post, employee);
+		int flag = 0;
+
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getPostId().equals(l.getPostId())) {
+				flag = 1;
+				break;
+			}
+		}
+		if (flag == 0) {
+			post.setLikesCount(post.getLikesCount() + 1);
+			pr.save(post);
+			flag = -1;
 			like.save(l);
-			p.setHasLiked(true);
-			
-		}
-		else
-		{
-			p.setLikesCount(p.getLikesCount()-1);
+		} else {
+			post.setLikesCount(post.getLikesCount() - 1);
 			like.delete(like.findByPostId(l.getPostId()));
-			l.setLiked(false);
-			pr.save(p);
+			pr.save(post);
 		}
-	    
-     return p;
+		ret = postadaptor.convert(post, employee);
+		if (flag == -1) {
+			ret.setHasLiked(true);
+		}
+		return ret;
 	}
 }
