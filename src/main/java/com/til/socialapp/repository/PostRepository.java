@@ -20,5 +20,5 @@ public interface PostRepository extends MongoRepository<Post, ObjectId>{
 
 
 	public Post findByPostId(String postId);
-	
+	public Page<Post> findByEmpIdOrderByCreatedAtDesc(int empId, Pageable pageable);
 }

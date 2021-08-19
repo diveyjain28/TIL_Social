@@ -3,8 +3,10 @@ package com.til.socialapp.model;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
-@Document(collection="common")
+@Document(collection = "common")
+@Component
 public class Common {
 private String[] tags;
 private List<Teams> teams;

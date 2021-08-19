@@ -6,7 +6,9 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.til.socialapp.adaptor.CommentAdaptor;
 import com.til.socialapp.model.Comment;
+import com.til.socialapp.model.CommentResponse;
 import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.Post;
 import com.til.socialapp.repository.CommentRepository;
@@ -22,20 +24,30 @@ public class CommentService {
 	@Autowired
     private EmployeeRepository emp;
 	
-	public Comment registerServiceComment(Comment comment) {
+	public CommentResponse registerServiceComment(Comment comment) {
 
 		Post p = pr.findByPostId(comment.getPostId());
 		Employee e=emp.findByEmpId(comment.getEmpId());
-		comment.setName(e.getName());
-		comment.setEmpImgUrl(e.getImgUrl());
+		
 		cr.save(comment);
 		p.setCommentsCount(p.getCommentsCount() + 1);
 		pr.save(p);
-		return comment;
+		CommentAdaptor cAdap=new CommentAdaptor();
+		CommentResponse ret=cAdap.convert(comment, e);
+		return ret;
 	}
 
-	public List<Comment> fetchServiceComment(String postId) {
-		List<Comment> ret = cr.findByPostId(postId);
+	public List<CommentResponse> fetchServiceComment(String postId) {
+		List<Comment> comments = cr.findByPostId(postId);
+		List<CommentResponse> ret=new ArrayList<CommentResponse>();
+		for(int i=0;i<comments.size();i++)
+		{
+			Employee e=emp.findByEmpId(comments.get(i).getEmpId());
+			CommentAdaptor cAdap=new CommentAdaptor();
+			CommentResponse cRes=cAdap.convert(comments.get(i), e);
+			ret.add(cRes);
+			
+		}
 		return ret;
 	}
 }

@@ -2,8 +2,10 @@ package com.til.socialapp.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.stereotype.Component;
 
 @Document(collection = "employee")
+@Component
 public class Employee {
 	@Id
 	private int empId;
@@ -17,7 +19,6 @@ public class Employee {
 
 	// Constructor
 	public Employee() {
-	
 	}
 
 	public Employee(String name, int empId, String department, String bio, String team, String designation,
@@ -57,7 +58,6 @@ public class Employee {
 	public void setEmpId(int empId) {
 		this.empId = empId;
 	}
-
 
 	public String getDepartment() {
 		return department;
