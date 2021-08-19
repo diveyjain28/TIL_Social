@@ -11,16 +11,14 @@ public class Tag {
 
 	@Id
 	private int empId;
-	private String[] tags; // a list of tags that employee chosen while sign in
-
+	private String[] tags;   //a list of tags that employee chosen while sign in
+	public Tag() {
+		
+	}
 	public Tag(int empId, String[] tags) {
 		super();
 		this.empId = empId;
 		this.tags = tags;
-	}
-
-	public Tag() {
-
 	}
 
 	public int getEmpId() {

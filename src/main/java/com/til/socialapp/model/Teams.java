@@ -16,19 +16,22 @@ public class Teams {
 
 	// @BsonProperty(value = "team")
 	private String team;
+	
 
-	@BsonProperty(value = "departments")
+@BsonProperty(value="departments")
 	private Departments[] departments;
-
+	
+	public Teams() {
+	
+	}
+	
 	public Teams(String team, Departments[] departments) {
 		super();
 		this.team = team;
 		this.departments = departments;
 	}
 
-	public Teams() {
-
-	}
+	
 
 	public String getTeam() {
 		return team;
@@ -45,5 +48,4 @@ public class Teams {
 	public void setDepartments(Departments[] departments) {
 		this.departments = departments;
 	}
-
 }

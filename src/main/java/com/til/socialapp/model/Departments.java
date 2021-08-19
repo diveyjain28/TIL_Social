@@ -11,7 +11,6 @@ public class Departments {
 
 	private String name;
 	private String[] designations;
-
 	public Departments(String name, String[] designations) {
 		super();
 		this.name = name;

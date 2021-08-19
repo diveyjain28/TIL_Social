@@ -9,22 +9,37 @@ import com.til.socialapp.model.Common;
 
 import com.til.socialapp.repository.CommonRepository;
 import com.til.socialapp.repository.EmployeeRepository;
+import com.til.socialapp.repository.TagsPojoRepository;
+import com.til.socialapp.repository.TeamsRepository;
 
 @Service
 public class CommonService {
+	//@Autowired
+	//private CommonRepository cr;
 	@Autowired
-	private CommonRepository cr;
+	private TagsPojoRepository tar;
+	@Autowired
+	private TeamsRepository  ter;
     
 	
-	public CommonService(CommonRepository cr) {
-		super();
-		this.cr = cr;
-	}
+//	public CommonService(CommonRepository cr) {
+//		super();
+//		this.cr = cr;
+//	}
+	
+	
 	
 	public Common fetchCommonService()
 	{
+		Common ret=new Common();
+		ret.setTags(tar.findAll().get(0).getTags());
 		
-		return cr.findAll().get(1);
+		ret.setTeams(ter.findAll());
+		
+		return ret;
+		
+		
+		//return cr.findAll().get(1);
 	}
 
 }
