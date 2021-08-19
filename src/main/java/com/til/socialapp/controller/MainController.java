@@ -27,6 +27,7 @@ import com.til.socialapp.service.EmployeeService;
 import com.til.socialapp.service.FeedService;
 import com.til.socialapp.service.LikeService;
 import com.til.socialapp.service.PostService;
+import com.til.socialapp.service.RecommendationService;
 import com.til.socialapp.service.TagService;
 
 @CrossOrigin
@@ -47,8 +48,10 @@ public class MainController {
 	private CommonService cserv;
 	@Autowired
 	private TagService tagsserv;
-
+  @Autowired
+	private RecommendationService rs;
 	// APIs for profile save and fetch
+
 	@PostMapping("/profile/save")
 	public Employee register(@RequestBody Employee emp) {
 		Employee ret = empserv.registerService(emp);
@@ -102,10 +105,15 @@ public class MainController {
 	}
 
 	@GetMapping("/common/fetch")
-	public Common addTeamDepService() {
-		Common c = cserv.fetchCommonService();
-
+	public Common addTeamDepService()
+	{
+		Common c=cserv.fetchCommonService();	
 		return c;
-
+	}
+	@GetMapping("/recommend/fetch/{empId}")
+	public List<Employee> fetchSimilar(@PathVariable int empId)
+	{
+		List<Employee> eld=rs.returnlistEmp(empId);
+		return eld;
 	}
 }

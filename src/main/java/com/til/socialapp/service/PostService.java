@@ -17,6 +17,7 @@ public class PostService {
 	@Autowired
 	private EmployeeRepository emp;
 
+
 	public PostResponse savePostService(Post post) {
 		Employee employee = emp.findByEmpId(post.getEmpId());
 		pr.save(post);

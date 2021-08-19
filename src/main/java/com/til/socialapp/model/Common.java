@@ -1,40 +1,35 @@
 package com.til.socialapp.model;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 @Document(collection = "common")
 @Component
 public class Common {
-	private String[] tags;
-	private Teams[] teams;
+private String[] tags;
+private List<Teams> teams;
 
-//constructors
-	public Common(String[] tags, Teams[] teams) {
-		super();
-		this.tags = tags;
-		this.teams = teams;
-	}
 
-	public Common() {
-		super();
-	}
-
-//Getters and setters
-	public String[] getTags() {
-		return tags;
-	}
-
-	public void setTags(String[] tags) {
-		this.tags = tags;
-	}
-
-	public Teams[] getTeams() {
-		return teams;
-	}
-
-	public void setTeams(Teams[] teams) {
-		this.teams = teams;
-	}
-
+public Common() {
+	super();
+}
+public Common(String[] tags, List<Teams> teams) {
+	super();
+	this.tags = tags;
+	this.teams = teams;
+}
+public String[] getTags() {
+	return tags;
+}
+public void setTags(String[] tags) {
+	this.tags = tags;
+}
+public List<Teams> getTeams() {
+	return teams;
+}
+public void setTeams(List<Teams> teams) {
+	this.teams = teams;
+}
 }

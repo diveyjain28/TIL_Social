@@ -13,6 +13,7 @@ public class Like {
 	private int empId;
 
 	public Like() {
+
 	}
 
 	public Like(String postId, int empId) {
