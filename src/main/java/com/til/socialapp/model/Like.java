@@ -12,8 +12,7 @@ public class Like {
 	private int empId;
 
 	public Like() {
-		super();
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Like(boolean liked, String postId, int empId) {

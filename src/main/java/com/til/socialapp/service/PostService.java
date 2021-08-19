@@ -20,10 +20,10 @@ public class PostService
 	public Post savePostService(Post p)
 	{
 		
-		Employee e=emp.findByEmpId(p.getEmpId());
-		p.setName(e.getName());
-		p.setDesignation(e.getDesignation());
-		p.setEmpImgUrl(e.getImgUrl());
+//		Employee e=emp.findByEmpId(p.getEmpId());
+//		p.setName(e.getName());
+//		p.setDesignation(e.getDesignation());
+//		p.setEmpImgUrl(e.getImgUrl());
 		post.save(p);
 		return p;
 	}

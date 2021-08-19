@@ -1,5 +1,8 @@
 package com.til.socialapp.advice;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
@@ -31,6 +34,12 @@ public class MyControllerAdvice extends ResponseEntityExceptionHandler
 		response.setError(obj.getClass().getSimpleName());
 		response.setMessage(obj.getMessage());
 		response.setStatus(String.valueOf(s));
+		StringWriter sw = new StringWriter();
+		PrintWriter pw = new PrintWriter(sw);
+		obj.printStackTrace(pw);
+		String sStackTrace = sw.toString(); // stack trace as a string
+		System.out.println(sStackTrace);
+		response.setStackTrace(sStackTrace);
 		ResponseEntity<Object> entity = new ResponseEntity<>(response,status);
 		return entity;
 	}

@@ -17,7 +17,7 @@ public class Employee {
 
 	// Constructor
 	public Employee() {
-		super();
+	
 	}
 
 	public Employee(String name, int empId, String department, String bio, String team, String designation,

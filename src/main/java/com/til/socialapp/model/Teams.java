@@ -15,9 +15,13 @@ public class Teams {
 	//@BsonProperty(value = "team")
 	private String team;
 	
-	@BsonProperty(value="departments")
+	
+@BsonProperty(value="departments")
 	private Departments[] departments;
 	
+	public Teams() {
+	
+	}
 	
 	public Teams(String team, Departments[] departments) {
 		super();
