@@ -25,6 +25,8 @@ public interface LikeRepository extends MongoRepository<Like, ObjectId>{
 
 	public List<Like> findByEmpIdAndPostId(int empId, String string);
 
+	public Like findByPostIdAndEmpId(String postId, int empId);
+
 	
 
 }
