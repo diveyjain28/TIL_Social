@@ -48,7 +48,7 @@ public class MainController {
 	private CommonService cserv;
 	@Autowired
 	private TagService tagsserv;
-  @Autowired
+	@Autowired
 	private RecommendationService rs;
 	// APIs for profile save and fetch
 
@@ -93,9 +93,11 @@ public class MainController {
 	// API for feed
 	@GetMapping("/post/fetch")
 	@ResponseBody
+
 	public FeedResponse feedPost(@RequestParam("page") int page, @RequestParam("sortBy") String sorted,
-			@RequestParam("empId") int empid, @RequestParam("type") String type) {
-		return feedserv.getFeed(sorted, empid, type, page);
+			@RequestParam("empId") int empid, @RequestParam("type") String type,
+			@RequestParam(name="tag", required=false) String tag) {
+		return feedserv.getFeed(sorted, empid, type, page, tag);
 	}
 
 	@PostMapping("/profile/tag/save")
