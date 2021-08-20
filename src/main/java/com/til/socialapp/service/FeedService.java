@@ -21,7 +21,6 @@ import com.til.socialapp.model.Employee;
 import com.til.socialapp.model.FeedResponse;
 import com.til.socialapp.model.Like;
 
-
 import com.til.socialapp.model.Post;
 import com.til.socialapp.model.PostResponse;
 
@@ -31,35 +30,36 @@ public class FeedService {
 	private PostRepository post;
 	@Autowired
 	private EmployeeRepository emp;
-
 	@Autowired
 	private LikeRepository like;
 
-	public Page<PostResponse> getFeed(String sorted, int empId, String type, int page) {
+	public Page<PostResponse> getFeed(String sorted, int empId, String type, int page, String tag) {
 		Pageable pageable = PageRequest.of(page, 5);
 		Page<Post> feed = null;
 		Employee e = emp.findByEmpId(empId);
 		List<PostResponse> ret = new ArrayList<PostResponse>();
-		if (type.equals("feed")) {
-			if (sorted.equals("recency")) {
-				feed = post.findByEmpIdNotAndTagsInOrderByCreatedAtDesc(empId, e.getInterests(), pageable);
-			} else {
-				feed = post.findByEmpIdNotAndTagsInOrderByLikesCountDesc(empId, e.getInterests(), pageable);
+		if (tag == null) {
+			if (type.equals("feed")) {
+				if (sorted.equals("recency")) {
+					feed = post.findByEmpIdNotAndTagsInOrderByCreatedAtDesc(empId, e.getInterests(), pageable);
+				} else {
+					feed = post.findByEmpIdNotAndTagsInOrderByLikesCountDesc(empId, e.getInterests(), pageable);
+				}
+			} else if (type.equals("self")) {
+				if (sorted.equals("recency")) {
+					feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
+				} else {
+					feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
+				}
 			}
-		} else if (type.equals("self")) {
+		} else {
+			String interests[] = { tag };
 			if (sorted.equals("recency")) {
-				// feed = post.findByEmpIdAndTagsInOrderByCreatedAtDesc( empId,e.getInterests(),
-				// pageable);
-				feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
+				feed = post.findByTagsInOrderByCreatedAtDesc(interests, pageable);
 			} else {
-				// feed = post.findByEmpIdAndTagsInOrderByLikesCountDesc(empId,e.getInterests(),
-				// pageable);
-				feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
-
-
+				feed = post.findByTagsInOrderByLikesCountDesc(interests, pageable);
 			}
 		}
-
 		for (int i = 0; i < feed.getNumberOfElements(); i++) {
 			Post p = feed.getContent().get(i);
 			Employee employee = emp.findByEmpId(p.getEmpId());
@@ -67,14 +67,11 @@ public class FeedService {
 			PostResponse temp = postadaptor.convert(p, employee);
 			List<Like> temp1 = like.findByEmpIdAndPostId(empId, p.getPostId().toString());
 			if (!temp1.isEmpty()) {
-
 				if (temp.getPostId().equals(temp1.get(0).getPostId())) {
 					temp.setHasLiked(true);
 				}
 			}
-
 			ret.add(temp);
-
 		}
 		Page<PostResponse> pageret = new PageImpl<>(ret);
 //		FeedResponse feedret = new FeedResponse();
