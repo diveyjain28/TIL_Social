@@ -33,7 +33,8 @@ public class FeedService {
 	@Autowired
 	private LikeRepository like;
 
-	public Page<PostResponse> getFeed(String sorted, int empId, String type, int page, String tag) {
+
+	public FeedResponse getFeed(String sorted, int empId, String type, int page, String tag) {
 		Pageable pageable = PageRequest.of(page, 5);
 		Page<Post> feed = null;
 		Employee e = emp.findByEmpId(empId);
@@ -73,9 +74,31 @@ public class FeedService {
 			}
 			ret.add(temp);
 		}
-		Page<PostResponse> pageret = new PageImpl<>(ret);
-//		FeedResponse feedret = new FeedResponse();
-//		feedret.setContent(ret);
-		return pageret;
+//		int totalPgaes=feed.getTotalPages();
+//		System.out.println(totalPgaes);
+		//Page<PostResponse> pageret = new PageImpl<>(ret);
+		FeedResponse feedret = new FeedResponse();
+		feedret.setContent(ret);
+		if(feed.getNumber()==0)
+		{
+			feedret.setFirst(true);
+		}
+		
+		feedret.setTotalPages(feed.getTotalPages());
+	    feedret.setTotalElements(feed.getTotalElements());
+	    feedret.setSize(feed.getSize());
+	    feedret.setNumber(feed.getNumber());
+	    if(feed.getNumber()>=feed.getTotalPages()-1)
+		{
+			feedret.setLast(true);
+		}
+		if(feed.getNumberOfElements()==0)
+		{
+			feedret.setEmpty(true);
+		}
+	    feedret.setNumberOfElements(feed.getNumberOfElements());
+	    //feed.get
+		//return pageret;
+		return feedret;
 	}
 }
