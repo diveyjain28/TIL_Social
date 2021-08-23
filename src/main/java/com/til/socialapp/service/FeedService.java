@@ -50,7 +50,7 @@ public class FeedService {
 				if (sorted.equals("recency")) {
 					feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
 				} else {
-					feed = post.findByEmpIdOrderByCreatedAtDesc(empId, pageable);
+					feed = post.findByEmpIdOrderByLikesCountDesc(empId, pageable);
 				}
 			}
 		} else {
@@ -101,4 +101,7 @@ public class FeedService {
 		//return pageret;
 		return feedret;
 	}
+
+
+	
 }
