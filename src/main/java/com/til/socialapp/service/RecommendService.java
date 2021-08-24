@@ -19,9 +19,11 @@ public class RecommendService {
 	MongoTemplate mongoTemplate;
 	@Autowired
 	EmployeeRepository emp;
-
+    @Autowired 
+    ValidationService vs;
 	public List<Employee> recommendService(int empId)
 	{
+		vs.checkEmpIdExists(empId);
 		String arr[]=emp.findByEmpId(empId).getInterests();
 		String temp="[";
 		for(int i=0;i<arr.length;i++)

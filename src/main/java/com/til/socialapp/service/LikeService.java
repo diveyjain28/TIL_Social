@@ -22,8 +22,12 @@ public class LikeService {
 	private PostRepository pr;
 	@Autowired
 	private EmployeeRepository emp;
+	@Autowired
+	private ValidationService vs;
 
 	public PostResponse likePostService(Like l) {
+		vs.checkEmpIdExists(l.getEmpId());
+		vs.checkPostId(l.getPostId());
 		Post post = pr.findByPostId(l.getPostId());
 		int empid = pr.findByPostId(l.getPostId()).getEmpId();
 		
