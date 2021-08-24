@@ -24,6 +24,7 @@ public class FeedController {
 	public FeedResponse feedPost(@RequestParam("page") int page, @RequestParam("sortBy") String sorted,
 			@RequestParam("empId") int empid, @RequestParam("type") String type,
 			@RequestParam(name="tag", required=false) String tag) {
+
 		return feedserv.getFeed(sorted, empid, type, page, tag);
 	}
 }
