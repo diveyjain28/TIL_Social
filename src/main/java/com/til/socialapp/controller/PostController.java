@@ -11,6 +11,8 @@ import com.til.socialapp.model.Post;
 import com.til.socialapp.model.PostResponse;
 import com.til.socialapp.service.PostService;
 
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/post")
@@ -19,6 +21,7 @@ public class PostController {
 	private PostService postserv;
 	
 	@PostMapping("/save")
+	@ApiOperation(value="It saves the post")
 	public PostResponse savePost(@RequestBody Post post) {
 		// Post ret=postserv.savePostService(post);
 		return postserv.savePostService(post);

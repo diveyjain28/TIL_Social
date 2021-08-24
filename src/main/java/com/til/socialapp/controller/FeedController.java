@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.til.socialapp.model.FeedResponse;
 import com.til.socialapp.service.FeedService;
 
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/post")
@@ -20,7 +22,7 @@ public class FeedController {
 	private FeedService feedserv;
 	@GetMapping("/fetch")
 	@ResponseBody
-
+	@ApiOperation(value="It fetches feed based on recency and trending")
 	public FeedResponse feedPost(@RequestParam("page") int page, @RequestParam("sortBy") String sorted,
 			@RequestParam("empId") int empid, @RequestParam("type") String type,
 			@RequestParam(name="tag", required=false) String tag) {

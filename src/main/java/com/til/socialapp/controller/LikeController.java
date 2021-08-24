@@ -11,6 +11,8 @@ import com.til.socialapp.model.Like;
 import com.til.socialapp.model.PostResponse;
 import com.til.socialapp.service.LikeService;
 
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/like")
@@ -18,6 +20,7 @@ public class LikeController {
 	@Autowired
 	private LikeService likeserv;
 	@PostMapping("/save")
+	@ApiOperation(value="It saves like of the post")
 	public PostResponse likePost(@RequestBody Like like) {
 		return likeserv.likePostService(like);
 	}
