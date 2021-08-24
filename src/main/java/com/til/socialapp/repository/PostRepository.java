@@ -2,9 +2,12 @@ package com.til.socialapp.repository;
 
 import java.util.List;
 
+
 import org.bson.types.ObjectId;
+//import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Sort;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -24,4 +27,11 @@ public interface PostRepository extends MongoRepository<Post, ObjectId>{
 	public Page<Post> findByTagsInOrderByCreatedAtDesc(String[] interests, Pageable pageable);
 	public Page<Post> findByTagsInOrderByLikesCountDesc(String[] interests, Pageable pageable);
 	public Page<Post> findByEmpIdOrderByLikesCountDesc(int empId, Pageable pageable);
+	public Page<Post> findByEmpIdNotAndTagsIn(int empId, String[] interests, Pageable pageable);
+	
+	
+	
+	public Page<Post> findByEmpId(int empId, Pageable pageable);
+	public Page<Post> findByEmpIdNot(int empId, Pageable pageable);
+	public Page<Post> findByTagsIn(String[] interests, Pageable pageable);
 }
