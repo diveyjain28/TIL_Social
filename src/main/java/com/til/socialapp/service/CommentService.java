@@ -23,9 +23,14 @@ public class CommentService {
 	private PostRepository pr;
 	@Autowired
     private EmployeeRepository emp;
+	@Autowired 
+	private ValidationService vs;
 	
 	public CommentResponse registerServiceComment(Comment comment) {
-
+        
+		vs.checkEmpIdExists(comment.getEmpId());
+        vs.checkPostId(comment.getPostId());
+        vs.checkCommentNull(comment.getComment());
 		Post p = pr.findByPostId(comment.getPostId());
 		Employee e=emp.findByEmpId(comment.getEmpId());
 		

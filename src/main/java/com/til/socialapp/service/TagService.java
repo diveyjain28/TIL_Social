@@ -20,8 +20,10 @@ public class TagService {
 	private Tagrepository tag;
 	@Autowired
 	private EmployeeRepository emp;
-
+    @Autowired
+    private ValidationService vs;
 	public Tag updateserviceTag(Tag t1) {
+		vs.checkEmpIdExists(t1.getEmpId());
 		Employee e = emp.findByEmpId(t1.getEmpId());
 
 		e.setInterests(t1.getTags());

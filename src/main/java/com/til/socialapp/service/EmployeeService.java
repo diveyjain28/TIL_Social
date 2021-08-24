@@ -11,8 +11,11 @@ public class EmployeeService {
 
 	@Autowired
 	private EmployeeRepository emp;
-
+	@Autowired
+	private ValidationService vs;
+	
 	public Employee registerService(Employee e) {
+		vs.checkEmpId(e.getEmpId());
 		emp.save(e);
 		return e;
 	}
@@ -21,9 +24,7 @@ public class EmployeeService {
 
 		Employee ret = null;
 		ret = emp.findByEmpId(empId);
-		if (null == ret) {
-			throw new UserNotFoundException("Employee ID " + empId + " doesn't exist");
-		}
+		vs.checkEmpIdExists(empId);
 		return ret;
 	}
 

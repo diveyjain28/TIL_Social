@@ -16,9 +16,13 @@ public class PostService {
 	private PostRepository pr;
 	@Autowired
 	private EmployeeRepository emp;
-
+	 @Autowired
+	    private ValidationService vs;
 
 	public PostResponse savePostService(Post post) {
+		vs.checkPostData(post.getContent(), post.getImages(), post.getVideos());
+		vs.checkEmpIdExists(post.getEmpId());
+		
 		Employee employee = emp.findByEmpId(post.getEmpId());
 		pr.save(post);
 		PostAdaptor postadaptor = new PostAdaptor();
