@@ -24,18 +24,13 @@ public class ValidationService {
     	{
     		throw new UserNotFoundException("Employee ID " + empId + " doesn't exist");
     	}
-//    	else if(e.getEmpId()/10000!=1450)
-//    	{
-//    		
-//    		throw new SocialAppException("Employee id is invalid.");		
-//    	}
     }
     public void checkEmpId(int empId)
     {
     	if(empId/10000!=1450)
     	{
     		
-    		throw new SocialAppException("Employee id is invalid.");		
+    		throw new SocialAppException("Employee id is invalid. Employee id should be a 8 digit number starting with 1450.");		
     	}
     }
     
