@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 @CrossOrigin
 @RestController
 @RequestMapping("/comment")
-@Api(value = "Comment API")
+@Api(value = "Comment API",description="All APIs related to comment")
 public class CommentController {
 	@Autowired
 	private CommentService comserv;

@@ -11,11 +11,13 @@ import com.til.socialapp.model.Post;
 import com.til.socialapp.model.PostResponse;
 import com.til.socialapp.service.PostService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/post")
+@Api(value = "Post API",description="All APIs related to post")
 public class PostController {
 	@Autowired
 	private PostService postserv;

@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.til.socialapp.model.FeedResponse;
 import com.til.socialapp.service.FeedService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/post")
+@Api(value = "Feed API",description="All APIs related to feed")
 public class FeedController {
 	
 	@Autowired

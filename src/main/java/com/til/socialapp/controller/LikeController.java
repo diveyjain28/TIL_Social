@@ -11,11 +11,13 @@ import com.til.socialapp.model.Like;
 import com.til.socialapp.model.PostResponse;
 import com.til.socialapp.service.LikeService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/like")
+@Api(value = "Like API",description="All APIs related to like")
 public class LikeController {
 	@Autowired
 	private LikeService likeserv;

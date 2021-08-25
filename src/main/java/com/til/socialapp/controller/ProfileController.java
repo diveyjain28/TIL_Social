@@ -14,11 +14,13 @@ import com.til.socialapp.model.Tag;
 import com.til.socialapp.service.EmployeeService;
 import com.til.socialapp.service.TagService;
 
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/profile")
+@Api(value = "Profile API",description="All APIs related to profile")
 public class ProfileController {
 	@Autowired
 	private EmployeeService empserv;
