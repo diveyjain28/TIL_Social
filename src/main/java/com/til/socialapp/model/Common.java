@@ -8,22 +8,22 @@ import org.springframework.stereotype.Component;
 @Document(collection = "common")
 @Component
 public class Common {
-private String[] tags;
+private List<String> tags;
 private List<Teams> teams;
 
 
 public Common() {
 	super();
 }
-public Common(String[] tags, List<Teams> teams) {
+public Common(List<String> tags, List<Teams> teams) {
 	super();
 	this.tags = tags;
 	this.teams = teams;
 }
-public String[] getTags() {
+public List<String> getTags() {
 	return tags;
 }
-public void setTags(String[] tags) {
+public void setTags(List<String> tags) {
 	this.tags = tags;
 }
 public List<Teams> getTeams() {
