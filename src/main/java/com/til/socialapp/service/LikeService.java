@@ -35,11 +35,17 @@ public class LikeService {
 		PostAdaptor postadaptor = new PostAdaptor();
 		int flag = 0;
 		List<Like> temp1 = like.findByEmpIdAndPostId(l.getEmpId(), l.getPostId());
-		
+		if(post.getLikesCount()<0)
+			post.setLikesCount(0);
 		if (!temp1.isEmpty()) {
+			
+			
 			post.setLikesCount(post.getLikesCount() - 1);
+			if(post.getLikesCount()<0)
+				post.setLikesCount(0);
 			like.delete(temp1.get(0));
 			pr.save(post);
+			
 		}
 		else
 		{
