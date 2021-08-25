@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.RestController;
 import com.til.socialapp.model.Common;
 import com.til.socialapp.service.CommonService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/common")
+@Api(value = "Common API",description="All APIs related to department and team")
 public class CommonController {
 	
 	@Autowired
 	private CommonService cserv;
 	@GetMapping("/fetch")
+	@ApiOperation(value="It fetches all departments and teams list")
 	public Common addTeamDepService()
 	{
 		Common c=cserv.fetchCommonService();	
